@@ -101,9 +101,7 @@ const Loaders = env => {
         {
             test: /\.svg$/,
             exclude: EXCLUDE,
-            use: [
-                {loader: 'svg-sprite-loader'}
-            ]
+            use: [{loader: 'svg-sprite-loader'}]
         },
         {
             test: /\.less$/,

@@ -1,10 +1,10 @@
-import {app$, Component, h, init} from '../../modules'
-//import {Header, Loader, Main} from '../../components'
+import {Component, h} from '../../modules'
+import {Header, Loader, Main} from '../../components'
 
 
 export default class extends Component {
 
-    //state = {isInit: IS_SERVER}
+    state = {isInit: false}
 
     // componentDidMount() {
     //     app$.observe(state => this.setState({...state}))
@@ -12,12 +12,11 @@ export default class extends Component {
     // }
 
     render() {
+        let {isInit} = this.state,
+            dom = isInit
+                ? [h(Header), h(Main)]
+                : [h(Loader)]
 
-        // let {isInit} = this.state,
-        //     content = isInit
-        //         ? [h(Header), h(Main)]
-        //         : [h(Loader)]
-
-        return h('shell', 'content')
+        return h('shell', dom)
     }
 }

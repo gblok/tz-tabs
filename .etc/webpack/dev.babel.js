@@ -7,7 +7,8 @@ export default env => ({
     entry: {
         client: [
             './client',
-            './client/less/themes/default'
+            './client/less/themes/default',
+            './client/sprite'
         ],
         //svg: ['./client/sprite']
     },
@@ -16,7 +17,7 @@ export default env => ({
     devServer: {
         port: PORT,
         noInfo: true,
-        open: true,
+        //open: true,
         hot: true,
         compress: true,
         contentBase: STATIC,
