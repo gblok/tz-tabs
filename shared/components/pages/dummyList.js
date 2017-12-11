@@ -1,2 +1,2 @@
 import {h} from '../../modules'
-export default props => h('main', [h('h1', 'List')])
+export default ({length = 10}) => h('ul', Array.from({length}, (_,i)=> h('li', `item ${i}`)))

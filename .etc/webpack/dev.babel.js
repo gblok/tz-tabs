@@ -30,7 +30,7 @@ export default env => ({
             app
                 .set('view engine', 'pug')
                 .set('views', VIEWS)
-                .get('/', (req, res) => res.render('base', {app: InitAppData}))
+                .get(['/', '/:page'], (req, res) => res.render('base', {app: InitAppData}))
 
         }
     }

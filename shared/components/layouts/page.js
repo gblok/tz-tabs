@@ -1,29 +1,7 @@
-import {Component, h, store} from '../../modules'
+import {Component, h, LazyComponent, store} from '../../modules'
 import {Loader} from '../../components'
 
 const tags_ = new Set
-
-function loadList() {
-    return import(
-        /* webpackChunkName: 'dummyList' */
-        /* webpackMode: "lazy" */
-        '../pages/dummyList')
-}
-
-function loadChart() {
-    return import(
-        /* webpackChunkName: 'dummyChart' */
-        /* webpackMode: "lazy" */
-        '../pages/dummyChart')
-}
-
-function loadTable() {
-    return import(
-        /* webpackChunkName: 'dummyTable' */
-        /* webpackMode: "lazy" */
-        '../pages/dummyTable')
-}
-
 
 export default class extends Component {
 
@@ -35,26 +13,11 @@ export default class extends Component {
 
     loadPage(path) {
 
-        const handleTag = tag => this.setState({isLoad: true, tag: tag.default}, () => tags_.add(path))
+        const handle = tag => this.setState({isLoad: true, tag: tag.default}, () => tags_.add(path))
 
-        if (tags_.has(path)) {
-
-            handleTag(tags_.get(path))
-
-        } else {
-
-            switch (path) {
-                case 'dummyTable':
-                    loadList().then(handleTag)
-                    break
-                case 'dummyChart':
-                    loadChart().then(handleTag)
-                    break
-                case 'dummyList':
-                    loadTable().then(handleTag)
-                    break
-            }
-        }
+        tags_.has(path)
+            ? handle(tags_.get(path))
+            : LazyComponent.get(path)().then(handle)
 
     }
 
