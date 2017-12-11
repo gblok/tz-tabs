@@ -5,6 +5,7 @@ export const InitAppData = {
     title: 'React Tz App',
     lang: 'en',
     charset: 'utf-8',
+    charCode: 9763,
     theme: {
         color: '#36393E'
     }

@@ -29,6 +29,8 @@ export default {
             'eventemitter3',
             'superagent',
             'zousan',
+            'lokijs',
+            'babel-polyfill'
         ],
     },
     output: {

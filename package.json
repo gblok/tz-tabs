@@ -1,6 +1,6 @@
 {
   "name": "tz-tabs",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": true,
   "dependencies": {
     "eventemitter3": "",
@@ -10,7 +10,8 @@
     "react-dom": "",
     "react-hyperscript": "",
     "superagent": "",
-    "zousan": ""
+    "zousan": "",
+    "lokijs": ""
   },
   "devDependencies": {
     "babel-cli": "",

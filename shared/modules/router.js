@@ -1,58 +1,34 @@
-import P from 'page'
-import {_force, getCollection, hub} from './'
-import {dbID} from '../config'
-
+import Page from 'page'
+import {hub, pages, store} from '../modules'
 
 class Router {
-
-    route = null
-    current = null
-
     constructor() {
 
         const Handler = this.handler.bind(this)
+        Page(':page?', Handler)
 
-        P.base('/')
-
-        P('/', Handler)
-        P(':page', Handler)
-        P(':page/:action', Handler)
-        P(':page/:action/:id', Handler)
-        P('*', Handler)
-
-    }
-
-    forceCache() {
-        if (_force.size) {
-            _force.forEach(coll => Reflect.set(coll, 'cacheInit', 0))
-            _force.clear()
-        }
     }
 
     handler(route) {
 
-        this.forceCache()
-        this.mapper(route)
-        hub.emit('APP', {isInit: true})
-    }
-
-    mapper(route) {
-
         let {params} = route,
-            {page = 'index'} = params,
-            pages = getCollection('pages'),
-            current = pages.by(dbID, page) || pages.by(dbID, '404')
+            {page = null} = params,
+            current = page
+                ? pages.by('id', page) || null
+                : pages.findOne({order: {'$eq': 0}})
 
-        this.route = route
-        this.current = current
+
+        store.set('route', route)
+        store.set('current', current)
+
+        hub.emit('APP', {isInit: true})
     }
 
 
     start() {
-        P.start(true)
+        Page.start(true)
     }
 
 }
-
 
 export const router = new Router

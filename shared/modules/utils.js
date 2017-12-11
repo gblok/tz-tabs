@@ -3,6 +3,7 @@ export const isObject = val => {
     return val != null && (type == 'object' || type == 'function')
 }
 
+export const delay = ms => new Promise(r => setTimeout(r, ms))
 export const filterEsModule = j => Reflect.ownKeys(j).filter(k => k != '__esModule')
 export const compose = (...fns) => fns.reduce((f, g) => (...args) => f(g(...args)))
 export const pipe = (...fns) => compose.apply(compose, fns.reverse())

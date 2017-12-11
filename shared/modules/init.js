@@ -1,26 +1,16 @@
-import {router} from './'
-import {handler} from './tx'
-import {filterEsModule} from './utils'
+import {router} from '../modules/router'
+import {fetch, pages, upsert, delay} from '../modules'
 
-import * as Schemes from '../schemes'
-import * as PreloadData from '../api'
+const mapPages = res => res.forEach(page => upsert(pages, page))
 
+export const init = async () => {
 
+    await
+        fetch({uri: '/api/pages.json'})
+            .then(mapPages)
+            .catch(console.error)
 
+    await delay(500)
 
-export const init = () => {
-
-
-    console.log('init', {IS_CLIENT})
-
-    filterEsModule(PreloadData)
-        .forEach(cid => handler({cid}, PreloadData[cid]))
-
-
-    filterEsModule(Schemes)
-        .forEach(id => handler({cid: 'schemes'}, {id, ...Schemes[id]}))
-
-
-
-    return IS_CLIENT ? router.start() : false
+    return router.start()
 }

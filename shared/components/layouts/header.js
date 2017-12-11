@@ -1,10 +1,13 @@
 import {h} from '../../modules'
 import {ROUTE} from '../../actions'
+import {InitAppData} from '../../../.etc/config'
 
-export default props => h('header',
+const {title, charCode} = InitAppData
+
+export default () => h('header',
     [
         h('logo', {onClick: () => ROUTE('/')}, [
-            h('span', String.fromCharCode(9763)),
-            h('abbr', `React Tz App`)
+            h('span', String.fromCharCode(charCode)),
+            h('abbr', title)
         ])
     ])

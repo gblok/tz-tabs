@@ -1,4 +1,4 @@
-//import 'babel-polyfill'
+import 'babel-polyfill'
 
 import {h, render} from '../shared/modules'
 import {Shell} from '../shared/components'

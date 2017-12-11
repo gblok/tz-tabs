@@ -1,48 +1,26 @@
 import request from 'superagent'
 
-
-const headers = Object.create(null),
+const headers = {'Accept': 'application/json'},
     _pending = new Set
 
+export const fetch = async ({method = 'get', uri = null}) => {
 
-const URI = tx => {
-
-   //console.log({tx})
-
-    let {cid} = tx
-    return `/api/${cid}`
-}
-
-
-export const fetch = async tx => {
-
-
-
-   // console.log('fetch', {tx})
-
-    let {
-        method = 'get',
-        uri = null,
-        formData = null
-    } = tx
-
-    uri = uri ?  uri : URI(tx)
-
-
+    if(!uri)
+        throw Error('fetch not uri')
 
 
     return _pending.has(uri)
         ? null
         : (
             _pending.add(uri),
-                await request[method](uri)
-                    .set('Accept','application/json')
-                    .send({...formData})
-                    .then(res => {
-                        _pending.delete(uri)
-                        return res.body
-                    })
-                    .catch(console.error)
+                await
+                    request[method](uri)
+                        .set(headers)
+                        .then(res => {
+                            _pending.delete(uri)
+                            return res.body
+                        })
+                        .catch(console.error)
         )
 
 
