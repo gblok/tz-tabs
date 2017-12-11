@@ -1,0 +1,32 @@
+tags {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+tag {
+
+  .userSelect;
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 10px;
+  text-transform: uppercase;
+  padding: .25rem .5rem;
+  border-radius: 2px;
+  line-height: 1;
+  color: #000;
+  background-color: @gray;
+
+  &.green {
+    background-color: @green;
+  }
+  &.red {
+    background-color: @red;
+  }
+  &.blue {
+    background-color: @blue;
+  }
+}
+
+tags > tag:not(:last-child) {
+  margin-right: .5em;
+}

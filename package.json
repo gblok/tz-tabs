@@ -1,0 +1,63 @@
+{
+  "name": "tz-tabs",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "eventemitter3": "",
+    "most": "",
+    "page": "",
+    "react": "",
+    "react-dom": "",
+    "react-hyperscript": "",
+    "superagent": "",
+    "zousan": ""
+  },
+  "devDependencies": {
+    "babel-cli": "",
+    "babel-loader": "",
+    "babel-minify-webpack-plugin": "",
+    "babel-preset-env": "",
+    "babel-plugin-syntax-dynamic-import": "",
+    "babel-plugin-transform-class-properties": "",
+    "babel-plugin-transform-object-rest-spread": "",
+    "css-loader": "",
+    "cssnano": "",
+    "csso-loader": "",
+    "file-loader": "",
+    "less": "",
+    "less-loader": "",
+    "less-plugin-autoprefix": "",
+    "less-plugin-clean-css": "",
+    "less-plugin-group-css-media-queries": "",
+    "pug": "",
+    "style-loader": "",
+    "uglifyjs-webpack-plugin": "",
+    "webpack": "",
+    "webpack-bundle-analyzer": "",
+    "webpack-dev-server": ""
+  },
+  "babel": {
+    "presets": [
+      [
+        "env",
+        {
+          "targets": {
+            "node": "current"
+          },
+          "loose": true
+        }
+      ]
+    ],
+    "plugins": [
+      "syntax-dynamic-import",
+      "transform-class-properties",
+      "transform-object-rest-spread"
+    ]
+  },
+  "scripts": {
+    "prod": "webpack --config .etc/webpack/prod.babel.js --env production",
+    "dev": "webpack-dev-server --config .etc/webpack/dev.babel.js --env development",
+    "dll": "webpack --config .etc/webpack/dll.babel.js --env production",
+    "svgo": "svgo -f static/svg --config=.etc/svgo.yml"
+  }
+}

@@ -1,0 +1,13 @@
+.idea
+reports
+node_modules
+logs
+coverage
+stat.json
+zz
+assets
+tmp
+package-lock.json
+*.loki
+*.db
+*.log

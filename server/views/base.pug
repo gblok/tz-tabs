@@ -1,0 +1,28 @@
+doctype html
+html(lang= app.lang)
+    head
+        meta(charset= app.charset)
+
+        meta(http-equiv='X-UA-Compatible' content='IE=edge')
+
+        meta(name='robots' content='none')
+        meta(name='viewport' content='width=device-width, initial-scale=1, maximum-scale=5')
+        meta(name='SKYPE_TOOLBAR' content='SKYPE_TOOLBAR_PARSER_COMPATIBLE')
+        meta(name='format-detection' content='telephone=no')
+
+        meta(name='application-name' content= app.title)
+        meta(name='theme-color' content= app.theme.color)
+        meta(name='mobile-web-app-capable' content='yes')
+
+        meta(name='apple-mobile-web-app-capable' content='yes')
+        meta(name='apple-mobile-web-app-status-bar-style' content= app.theme.color)
+        meta(name='apple-mobile-web-app-title' content= app.title)
+
+        link(rel='shortcut icon' type='image/x-icon' href='/img/favicon.png')
+        //-- link(rel='stylesheet' type='text/css' href='/assets/css/default.css')
+
+        title= app.title
+
+    body
+        script(src='/assets/js/vendor.js')
+        script(src='/assets/js/client.js')
