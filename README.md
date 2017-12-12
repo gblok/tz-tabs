@@ -7,6 +7,6 @@
 `npm run dll`
 
 3. run dev server<br />
-`npm run dev`:fire:
+`npm run dev`
 
 ## Best regards :smile_cat:
