@@ -6,9 +6,8 @@ export default env => ({
         hints: false
     },
     entry: {
-        client: './client',
-        themes: './client/less/themes/default',
-        svg: './client/sprite'
+        client: ['./client', './client/sprite'],
+        themes: './client/less/themes/default'
     },
     module: {
         rules: Loaders(env)

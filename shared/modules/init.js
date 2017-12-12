@@ -10,7 +10,7 @@ export const init = async () => {
             .then(mapPages)
             .catch(console.error)
 
-    await delay(500)
+   // await delay(500)
 
     return router.start()
 }
