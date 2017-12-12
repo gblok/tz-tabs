@@ -1,4 +1,12 @@
-dl.chart {
+dl,
+dt,
+dd{
+  margin: 0;
+  padding: 0;
+}
+
+
+.chart {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -15,7 +23,7 @@ dt {
   text-align: center;
   font-size: 1.2em;
   margin-bottom: 20px;
-  margin-left: 130px;
+
 }
 
 .text {
@@ -35,7 +43,6 @@ dt {
   text-transform: uppercase;
   width: 100%;
   height: 40px;
-  margin-left: 130px;
   background: repeating-linear-gradient(
           to right,
           rgba(0,0,0,0),
@@ -47,7 +54,7 @@ dt {
   &:after {
     content: '';
     display: block;
-    background-color: #3d9970;
+    background-color: @b2;
     width: 50px;
     margin-bottom: 10px;
     height: 25%;

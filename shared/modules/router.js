@@ -17,11 +17,9 @@ class Router {
 
         console.log({page})
 
-          let  current = page
-                ? pages.by('id', page) || null
-                : pages.findOne({order: {'$eq': 0}})
-
-
+        let current = page
+            ? pages.by('id', page) || null
+            : pages.findOne({order: {'$eq': 0}})
 
 
         store.set('route', route)
@@ -33,6 +31,10 @@ class Router {
         hub.emit('APP', {isInit: true})
     }
 
+
+    route(uri) {
+        Page(uri)
+    }
 
     start() {
         Page.start(true)

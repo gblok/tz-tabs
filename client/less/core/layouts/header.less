@@ -5,6 +5,37 @@ header {
   justify-content: space-between;
   padding: .5rem 2rem;
 
+  .userSelect;
+
+  nav {
+    display: flex;
+    align-items: center;
+
+    padding-left: 2rem;
+    padding-right: 2rem;
+    cursor: default;
+
+    a {
+
+      display: flex;
+      align-items: center;
+      font-size: 1rem;
+      padding-left: .5rem;
+      padding-right: .5rem;
+
+      cursor: inherit;
+
+      &.active {
+        color: #ddd;
+      }
+
+      &:not(.active) {
+        cursor: pointer;
+      }
+
+    }
+  }
+
 }
 
 shell > header {
@@ -39,7 +70,7 @@ logo {
 
   span {
     font-size: 2.25rem;
-    color:@b2;
+    color: @b2;
   }
 
   abbr {
@@ -49,12 +80,4 @@ logo {
 
   padding: .75rem 1.75rem;
 
-}
-
-amount{
-  display: inline;
-  margin-left: .25em;
-  font-weight: 100;
-  opacity: .7;
-  color: @b2;
 }

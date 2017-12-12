@@ -1,3 +1,3 @@
-export const ROUTE = uri => console.log(uri)
+import {router} from '../modules/router'
 
-//page(route)
+export const ROUTE = uri => router.route(uri)

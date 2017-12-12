@@ -1,19 +1,19 @@
 [
   {
     "id": "dummyTable",
-    "title": "Dummy Table",
+    "title": "Table",
     "order": 1,
     "path": "dummyTable"
   },
   {
     "id": "dummyChart",
-    "title": "Dummy Chart",
+    "title": "Chart",
     "order": 2,
     "path": "dummyChart"
   },
   {
     "id": "dummyList",
-    "title": "Dummy List",
+    "title": "List",
     "order": 0,
     "path": "dummyList"
   }

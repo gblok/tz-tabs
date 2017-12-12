@@ -2,19 +2,28 @@ shell {
 
   display: flex;
   flex-direction: column;
-  //min-height: 100vh;
 
   > header {
     flex-shrink: 0;
   }
 
   > main {
-    //flex-grow: 1;
-    //display: inherit;
-
+    flex-grow: 1;
   }
 }
 
-section{
+section {
   padding: 2rem;
+}
+
+error {
+  padding: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 2rem;
+  color: @b2;
+
+  text-transform: capitalize;
 }
