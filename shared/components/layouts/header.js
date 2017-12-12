@@ -11,7 +11,7 @@ export default () => {
 
     return h('header',
         [
-            h('logo', {onClick: () => ROUTE('/')}, [
+            h('logo', {onClick: () => ROUTE('')}, [
                 h('span', String.fromCharCode(charCode)),
                 h('abbr', title)
             ]),

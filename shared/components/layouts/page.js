@@ -1,7 +1,7 @@
 import {Component, h, LazyComponent, store} from '../../modules'
 import {Loader} from '../../components'
 
-const tags_ = new Set
+const tags_ = new Map
 
 export default class extends Component {
 
@@ -13,7 +13,9 @@ export default class extends Component {
 
     loadPage(path) {
 
-        const handle = tag => this.setState({isLoad: true, tag: tag.default}, () => tags_.add(path))
+        const handle = tag => {
+            this.setState({isLoad: true, tag: tag.default}, () => tags_.set(path, tag))
+        }
 
         tags_.has(path)
             ? handle(tags_.get(path))

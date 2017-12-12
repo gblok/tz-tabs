@@ -32,7 +32,7 @@ class Router {
     }
 
 
-    route(uri) {
+    page(uri) {
         Page(uri)
     }
 
