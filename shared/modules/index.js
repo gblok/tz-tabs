@@ -13,7 +13,3 @@ export * from './store'
 export * from './init'
 
 const DT = 'dummyTable'
-
-
-// Lazy load Components
-export const LazyComponent = path =>  import('../components/pages/' + path)
