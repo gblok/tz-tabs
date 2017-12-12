@@ -12,10 +12,8 @@ export * from './hub'
 export * from './store'
 export * from './init'
 
+const DT = 'dummyTable'
+
 
 // Lazy load Components
-export const LazyComponent = new Map([
-    ['dummyTable', () => import('../components/pages/dummyTable')],
-    ['dummyChart', () => import('../components/pages/dummyChart')],
-    ['dummyList', () => import('../components/pages/dummyList')]
-])
+export const LazyComponent = path =>  import('../components/pages/' + path)

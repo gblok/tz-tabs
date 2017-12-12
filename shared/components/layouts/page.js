@@ -19,7 +19,7 @@ export default class extends Component {
 
         tags_.has(path)
             ? handle(tags_.get(path))
-            : LazyComponent.get(path)().then(handle)
+            : LazyComponent(path).then(handle)
 
     }
 
