@@ -20,7 +20,7 @@ export default () => {
                 .simplesort('order')
                 .map(page => h('a', {
                     className: id === page.id ? 'active' : '',
-                    onClick: id === page.id ? false : () => ROUTE(page.path)
+                    onClick: id === page.id ? false : () => ROUTE(page.id)
                 }, page.title))
                 .data()
             )
