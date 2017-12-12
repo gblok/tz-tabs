@@ -11,5 +11,3 @@ export * from './fetch'
 export * from './hub'
 export * from './store'
 export * from './init'
-
-const DT = 'dummyTable'
