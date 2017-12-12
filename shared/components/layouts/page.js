@@ -13,13 +13,13 @@ export default class extends Component {
 
     loadPage(path) {
 
-        const handle = tag => {
-            this.setState({isLoad: true, tag: tag.default}, () => tags_.set(path, tag))
-        }
+        const handle = tag => this.setState({isLoad: true, tag: tag.default}, () => tags_.set(path, tag))
 
         tags_.has(path)
             ? handle(tags_.get(path))
-            : LazyComponent(path).then(handle)
+            : LazyComponent(path)
+                .then(handle)
+                .catch(console.error)
 
     }
 
