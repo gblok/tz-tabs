@@ -30,7 +30,7 @@ export default {
             'superagent',
             'zousan',
             'lokijs',
-            'babel-polyfill'
+            //'babel-polyfill'
         ],
     },
     output: {
@@ -53,12 +53,19 @@ export default {
             path: DLL,
             name: '[name]'
         }),
-        new DefinePlugin({'process.env': {'NODE_ENV': JSON.stringify('production')}}),
+        new DefinePlugin({
+            'process.env': {
+                'NODE_ENV': JSON.stringify('production')
+            }
+        }),
         new LoaderOptionsPlugin({
             debug: false,
             minimize: true,
             sourceMap: false,
         }),
+        new ScriptExtHtmlWebpackPlugin({
+            defaultAttribute: 'defer'
+        })
         new NoEmitOnErrorsPlugin,
         new ModuleConcatenationPlugin,
         new MinifyPlugin({removeConsole: true, removeDebugger: true}, {comments: true}),
@@ -66,7 +73,19 @@ export default {
             {
                 cache: './tmp/ugly',
                 test: /\.js($|\?)/i,
-                parallel: true
+                parallel: true,
+                compress: {
+                    warnings: false,
+                    screw_ie8: true,
+                    conditionals: true,
+                    unused: true,
+                    comparisons: true,
+                    sequences: true,
+                    dead_code: true,
+                    evaluate: true,
+                    if_return: true,
+                    join_vars: true
+                }
             }
         ),
         // new BundleAnalyzerPlugin({

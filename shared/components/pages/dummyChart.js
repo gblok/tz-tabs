@@ -1,6 +1,6 @@
 import {h} from '../../modules'
 
-export default зкщзы => h('dl', {className: 'chart'}, [
+export const dummyChart = props => h('dl', {className: 'chart'}, [
     h('dt', 'Browser market share June 2015'),
     h('dd', {className: 'percentage percentage-11'}, [h('span', 'IE 11: 11.33%')]),
     h('dd', {className: 'percentage percentage-49'}, [h('span', 'Chrome: 49.77%')]),

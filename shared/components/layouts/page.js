@@ -11,13 +11,17 @@ export default class extends Component {
         this.setState({isLoad: false, tag: null})
     }
 
-    loadPage(path) {
+    loadPage(path, name) {
 
-        const handle = tag => this.setState({isLoad: true, tag: tag.default}, () => tags_.set(path, tag))
+        const handle = tag => {
+
+            console.log({tag})
+            this.setState({isLoad: true, tag: tag[name]}, () => tags_.set(path, tag))
+        }
 
         tags_.has(path)
             ? handle(tags_.get(path))
-            : LazyComponent(path)
+            : LazyComponent(path, name)
                 .then(handle)
                 .catch(console.error)
 
@@ -27,12 +31,12 @@ export default class extends Component {
 
         let {isLoad, tag} = this.state,
             current = store.get('current'),
-            {title, path} = current,
+            {title, path, id:name} = current,
             header = h('header', [h('h1', title)]),
             section = h('section', [isLoad ? h(tag) : Loader()])
 
         if (!isLoad)
-            this.loadPage(path)
+            this.loadPage(path, name)
 
         return h('main', [header, section])
     }

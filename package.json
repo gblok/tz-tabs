@@ -48,7 +48,7 @@
           "targets": {
             "node": "current"
           },
-          "loose": true
+          "comments": true
         }
       ]
     ],

@@ -21,7 +21,8 @@ const Common = env => ({
         path: STATIC,
         filename: 'assets/js/[name].js',
         sourceMapFilename: '[file].map',
-        libraryTarget: 'umd'
+        libraryTarget: 'umd',
+        chunkFilename: 'assets/js/[name].js'
     },
     resolve: {
         unsafeCache: true,
@@ -140,12 +141,25 @@ const Plugins = env => {
         plugins.push(new HotModuleReplacementPlugin)
 
     if (env === 'production') {
+
         plugins.push(new MinifyPlugin({removeConsole: true, removeDebugger: true}, {comments: false}))
         plugins.push(new UglifyJSPlugin({
             uglifyOptions: {
                 parallel: true,
                 cache: './tmp/ugly',
-                test: /\.js($|\?)/i
+                test: /\.js($|\?)/i,
+                compress: {
+                    warnings: false,
+                    conditionals: true,
+                    unused: true,
+                    comparisons: true,
+                    sequences: true,
+                    dead_code: true,
+                    evaluate: true,
+                    if_return: true,
+                    join_vars: true
+                }
+
             }
         }))
 

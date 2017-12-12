@@ -15,8 +15,6 @@ class Router {
         let {params} = route,
             {page = null} = params
 
-        console.log({page})
-
         let current = page
             ? pages.by('id', page) || null
             : pages.findOne({order: {'$eq': 0}})
@@ -24,9 +22,6 @@ class Router {
 
         store.set('route', route)
         store.set('current', current)
-
-
-        console.log({current})
 
         hub.emit('APP', {isInit: true})
     }
