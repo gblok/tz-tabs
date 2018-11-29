@@ -1,26 +1,23 @@
-import {
-    DefinePlugin,
-    DllPlugin,
-    LoaderOptionsPlugin,
-    MinifyPlugin,
-    ModuleConcatenationPlugin,
-    NoEmitOnErrorsPlugin,
-    UglifyJSPlugin
-} from './common'
+const webpack = require('webpack')
+const {ASSETS, DLL, ROOT} = require('../config/paths')
 
-import {DLL, STATIC} from '../config'
+const {DllPlugin, DefinePlugin, LoaderOptionsPlugin, NoEmitOnErrorsPlugin, optimize: {ModuleConcatenationPlugin}} = webpack
 
-export default {
-    context: process.cwd(),
-    cache: true,
-    performance: {hints: false},
+exports.default = {
     node: {
         fs: 'empty',
-        net: 'empty',
-        tls: 'empty'
+        // console: false,
+        // global: false,
+        // process: false,
+        // Buffer: false,
     },
+    cache: true,
+    context: ROOT,
+    performance: false,
+    mode: 'production',
     entry: {
         vendor: [
+            '@babel/polyfill',
             'react',
             'react-dom',
             'react-hyperscript',
@@ -30,76 +27,25 @@ export default {
             'superagent',
             'zousan',
             'lokijs',
-            //'babel-polyfill'
-        ],
+        ]
     },
     output: {
-        filename: 'assets/js/[name].js',
-        path: STATIC,
+        filename: 'js/[name].js',
+        path: ASSETS,
         library: '[name]',
         libraryTarget: 'umd'
     },
-    resolve: {
-        unsafeCache: true,
-        extensions: ['.js'],
-        modules: ['node_modules']
-    },
-    resolveLoader: {
-        modules: ['node_modules']
-    },
     plugins: [
-        new DllPlugin({
-            context: process.cwd(),
-            path: DLL,
-            name: '[name]'
-        }),
-        new DefinePlugin({
-            'process.env': {
-                'NODE_ENV': JSON.stringify('production')
-            }
-        }),
-        new LoaderOptionsPlugin({
-            debug: false,
-            minimize: true,
-            sourceMap: false,
-        }),
-        new ScriptExtHtmlWebpackPlugin({
-            defaultAttribute: 'defer'
-        })
+        new DllPlugin({context: ROOT, path: DLL, name: '[name]'}),
+        new DefinePlugin({'process.env': {'NODE_ENV': JSON.stringify('production')}}),
+        new LoaderOptionsPlugin({minimize: true, debug: false}),
         new NoEmitOnErrorsPlugin,
         new ModuleConcatenationPlugin,
-        new MinifyPlugin({removeConsole: true, removeDebugger: true}, {comments: true}),
-        new UglifyJSPlugin(
-            {
-                cache: './tmp/ugly',
-                test: /\.js($|\?)/i,
-                parallel: true,
-                compress: {
-                    warnings: false,
-                    screw_ie8: true,
-                    conditionals: true,
-                    unused: true,
-                    comparisons: true,
-                    sequences: true,
-                    dead_code: true,
-                    evaluate: true,
-                    if_return: true,
-                    join_vars: true
-                }
-            }
-        ),
-        // new BundleAnalyzerPlugin({
-        //     analyzerMode: 'server',
-        //     analyzerHost: '127.0.0.1',
-        //     analyzerPort: 8888,
-        //     reportFilename: 'report.html',
-        //     defaultSizes: 'parsed',
-        //     openAnalyzer: true,
-        //     generateStatsFile: false,
-        //     statsFilename: 'stats.json',
-        //     statsOptions: null,
-        //     logLevel: 'info'
-        // })
-    ]
+    ],
+    resolve: {
+        unsafeCache: true,
+        extensions: ['.js', '.es6', '.jsx', '.less', '.svg'],
+        modules: ['node_modules']
+    },
+    resolveLoader: {modules: ['node_modules']}
 }
-

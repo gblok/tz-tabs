@@ -43,9 +43,7 @@ class Store {
                 target[part] = value
             }
             else {
-                target = target[part] = {
-                    ...target[part]
-                }
+                target = target[part] = {...target[part]}
             }
         }
 

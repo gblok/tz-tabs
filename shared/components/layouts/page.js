@@ -13,11 +13,7 @@ export default class extends Component {
 
     loadPage(path, name) {
 
-        const handle = tag => {
-
-            console.log({tag})
-            this.setState({isLoad: true, tag: tag[name]}, () => tags_.set(path, tag))
-        }
+        const handle = tag => this.setState({isLoad: true, tag: tag[name]}, () => tags_.set(path, tag))
 
         tags_.has(path)
             ? handle(tags_.get(path))

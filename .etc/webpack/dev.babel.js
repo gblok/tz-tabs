@@ -1,39 +1,50 @@
-import {Common, Loaders, Plugins} from './common'
-import {InitAppData, PORT, STATIC, VIEWS} from '../config'
+import webpack from 'webpack'
+import {PORT, STATIC, VIEWS, InitAppData} from '../config'
+import {Common, Plugins, Rules} from './common'
+const {HotModuleReplacementPlugin} = webpack
 
-export default env => ({
-    ...Common(env),
-    stats: false,
-    entry: {
-        client: [
-            './client',
-            './client/less/themes/default',
-            './client/sprite'
-        ],
-        //svg: ['./client/sprite']
-    },
-    module: {rules: Loaders(env)},
-    plugins: Plugins(env),
-    devServer: {
-        port: PORT,
-        noInfo: true,
-        //open: true,
-        hot: true,
-        compress: true,
-        contentBase: STATIC,
-        historyApiFallback: true,
-        watchOptions: {
-            aggregateTimeout: 500,
-            poll: 500
+export default () => {
+
+    const opts = {IS_DEV: true}
+    const plugins = Plugins(opts)
+    plugins.push(new HotModuleReplacementPlugin)
+    const rules = Rules(opts)
+
+    return {
+        entry: {
+            client: [
+                './client',
+                './client/less/app',
+                './client/sprite'
+            ]
         },
-        before(app) {
-            app
-                .set('view engine', 'pug')
-                .set('views', VIEWS)
-                .get(['/', '/:page'], (req, res) => res.render('base', {app: InitAppData}))
+        ...Common(opts),
+        plugins,
+        module: {rules},
+        devServer: {
+            port: PORT,
+            contentBase: STATIC,
+            hot: true,
+            compress: true,
+            historyApiFallback: {index: '/'},
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Credentials": "true",
+                "Access-Control-Allow-Headers": "Content-Type, Authorization, x-id, Content-Length, X-Requested-With",
+                "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS"
+            },
+            watchOptions: {
+                aggregateTimeout: 1000,
+                poll: 2000,
+                ignored: /node_modules/
+            },
+            before(app) {
+                app
+                    .set('view engine', 'pug')
+                    .set('views', VIEWS)
+                    .get(['/', '/:page'], (req, res) => res.render('base', {app: InitAppData}))
 
+            }
         }
     }
-})
-
-
+}

@@ -1,16 +1,15 @@
-import {Common, Loaders, Plugins} from './common'
+import {Common, Plugins, Rules} from './common'
 
-export default env => ({
-    ...Common(env),
-    performance: {
-        hints: false
-    },
-    entry: {
-        client: ['./client', './client/sprite'],
-        themes: './client/less/themes/default'
-    },
-    module: {
-        rules: Loaders(env)
-    },
-    plugins: Plugins(env)
-})
+const
+    client = () => {
+        const opts = Object.create(null)
+        return {
+            entry: {app: ['./client', './client/less/app']},
+            ...Common(opts),
+            plugins: Plugins(opts),
+            module: {rules: Rules(opts)}
+        }
+    }
+
+
+export default () => [client()]

@@ -1,6 +1,6 @@
 {
   "name": "tz-tabs",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": true,
   "dependencies": {
     "eventemitter3": "",
@@ -9,21 +9,19 @@
     "react": "",
     "react-dom": "",
     "react-hyperscript": "",
-    "superagent": "",
+    "superagent": "^v4.0.0-beta.5",
     "zousan": "",
     "lokijs": ""
   },
   "devDependencies": {
-    "babel-cli": "",
+    "@babel/core": "",
+    "@babel/plugin-syntax-dynamic-import": "",
+    "@babel/plugin-proposal-object-rest-spread": "",
+    "@babel/plugin-proposal-class-properties": "",
+    "@babel/polyfill": "",
+    "@babel/preset-env": "",
     "babel-loader": "",
-    "babel-minify-webpack-plugin": "",
-    "babel-preset-env": "",
-    "babel-plugin-syntax-dynamic-import": "",
-    "babel-plugin-transform-class-properties": "",
-    "babel-plugin-transform-object-rest-spread": "",
     "css-loader": "",
-    "cssnano": "",
-    "csso-loader": "",
     "file-loader": "",
     "less": "",
     "less-loader": "",
@@ -31,37 +29,39 @@
     "less-plugin-clean-css": "",
     "less-plugin-group-css-media-queries": "",
     "pug": "",
-    "svg-sprite-loader": "",
-    "svgo": "",
-    "svgo-loader": "",
+    "pug-loader": "",
     "style-loader": "",
-    "uglifyjs-webpack-plugin": "",
     "webpack": "",
-    "webpack-bundle-analyzer": "",
-    "webpack-dev-server": ""
+    "webpack-cli": "",
+    "webpack-dev-server": "",
+    "svg-sprite-loader": "",
+    "csso-loader": "",
+    "svgo": "",
+    "svgo-loader": ""
   },
   "babel": {
+    "compact": true,
     "presets": [
       [
-        "env",
+        "@babel/preset-env",
         {
+          "loose": true,
           "targets": {
             "node": "current"
-          },
-          "comments": true
+          }
         }
       ]
     ],
     "plugins": [
-      "syntax-dynamic-import",
-      "transform-class-properties",
-      "transform-object-rest-spread"
+      "@babel/plugin-syntax-dynamic-import",
+      "@babel/plugin-proposal-class-properties",
+      "@babel/plugin-proposal-object-rest-spread"
     ]
   },
   "scripts": {
-    "prod": "webpack --config .etc/webpack/prod.babel.js --env production",
-    "dev": "webpack-dev-server --config .etc/webpack/dev.babel.js --env development",
-    "dll": "webpack --config .etc/webpack/dll.babel.js --env production",
+    "prod": "webpack-cli --config .etc/webpack/prod.babel.js",
+    "dev": "webpack-dev-server --config .etc/webpack/dev.babel.js",
+    "dll": "webpack-cli --config .etc/webpack/dll.babel.js",
     "svgo": "svgo -f static/svg --config=.etc/svgo.yml"
   }
 }
